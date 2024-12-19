@@ -1,0 +1,112 @@
+- Home Screen:
+    Control: Screen
+    Properties:
+      OnVisible: |-
+        =Set(fortime,true);
+        Refresh(Walkers);
+        Set(var_dog,0);
+        ClearCollect(coldogs,Dogs);
+        Reset(Gallery1_1);
+        Set(fortime,false);
+      Fill: =RGBA(253, 222, 207, 1)
+    Children:
+    - gr_all_HS:
+        Control: Group
+        Children:
+        - Image3:
+            Control: Image
+            Properties:
+              Image: =banner
+              Height: =730
+              ImagePosition: =ImagePosition.Stretch
+              Width: =921
+              X: =20
+              Y: =20
+        - b_dogs:
+            Control: Classic/Button
+            Properties:
+              OnSelect: |-
+                =Refresh(Dogs);
+                Navigate('Dogs Screen');
+              Text: ="Dogs"
+              Fill: =RGBA(168, 0, 0, 1)
+              Height: =70
+              HoverFill: =ColorFade(RGBA(168, 0, 0, 1), -20%)
+              Size: =20
+              Width: =285
+              X: =1002
+              Y: =493
+        - b_trips:
+            Control: Classic/Button
+            Properties:
+              OnSelect: |-
+                =Set(var_addnew,0);
+                Refresh(Trips);
+                Navigate('Trips Screen');
+              Text: ="Manage Trips"
+              Fill: =RGBA(168, 0, 0, 1)
+              Height: =70
+              HoverFill: =ColorFade(RGBA(168, 0, 0, 1), -20%)
+              Size: =20
+              Width: =285
+              X: =1002
+              Y: =352
+        - b_bookings:
+            Control: Classic/Button
+            Properties:
+              OnSelect: |-
+                =Refresh(Booking);
+                Navigate('Booking Screen')
+              Text: ="Bookings"
+              Fill: =RGBA(168, 0, 0, 1)
+              Height: =70
+              HoverFill: =ColorFade(RGBA(168, 0, 0, 1), -20%)
+              Size: =20
+              Width: =285
+              X: =1002
+              Y: =211
+        - l_header:
+            Control: Label
+            Properties:
+              Text: ="Dog Walker United"
+              Align: =Align.Center
+              FontWeight: =FontWeight.Bold
+              Height: =139
+              Size: =30
+              Underline: =true
+              Width: =407
+              X: =941
+              Y: =72
+    - gr_loading_HS:
+        Control: Group
+        Children:
+        - Label1:
+            Control: Label
+            Properties:
+              Text: ="Loading"
+              Align: =Align.Center
+              Height: =99
+              Size: =35
+              Visible: =fortime
+              Width: =1252
+              X: =60
+              Y: =331
+        - Rectangle2:
+            Control: Rectangle
+            Properties:
+              Fill: =RGBA(241, 244, 249, .9)
+              Height: =682
+              Visible: =fortime
+              Width: =1293
+              X: =40
+              Y: =40
+    - tx_version:
+        Control: Label
+        Properties:
+          Text: ="Version 1.0"
+          Align: =Align.Right
+          Height: =29
+          Size: =10
+          Width: =104
+          X: =1260
+          Y: =739
