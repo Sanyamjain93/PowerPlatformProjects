@@ -1,0 +1,510 @@
+- Booking Screen:
+    Control: Screen
+    Children:
+    - gr_NoData_BS_1:
+        Control: Group
+        Children:
+        - Icon11_1:
+            Control: Classic/Icon
+            Variant: Bus
+            Properties:
+              Height: =262
+              Icon: =Icon.Bus
+              Visible: |-
+                =If(
+                First(Sort(Filter(Booking,Walker.Value=User().FullName && Status.Value = "Upcoming" && Date > Now()),Date,SortOrder.Ascending)).Walker.Value = Blank(),true,false
+                )
+              Width: =208
+              X: =946
+              Y: =354
+        - Label27_1:
+            Control: Label
+            Properties:
+              Text: ="No Future Trip Found"
+              Align: =Align.Center
+              FontWeight: =FontWeight.Bold
+              Height: =99
+              Size: =20
+              Visible: |-
+                =If(
+                First(Sort(Filter(Booking,Walker.Value=User().FullName && Status.Value = "Upcoming" && Date > Now()),Date,SortOrder.Ascending)).Walker.Value = Blank(),true,false
+                )
+              Width: =447
+              X: =826
+              Y: =261
+        - Rectangle18_1:
+            Control: Rectangle
+            Properties:
+              Fill: =RGBA(214, 223, 238, 1)
+              Height: =545
+              Visible: |-
+                =If(
+                First(Sort(Filter(Booking,Walker.Value=User().FullName && Status.Value = "Upcoming" && Date > Now()),Date,SortOrder.Ascending)).Walker.Value = Blank(),true,false
+                )
+              Width: =624
+              X: =732
+              Y: =213
+    - gr_NoData_BS:
+        Control: Group
+        Children:
+        - Icon11:
+            Control: Classic/Icon
+            Variant: Bus
+            Properties:
+              Height: =262
+              Icon: =Icon.Bus
+              Visible: |-
+                =If(
+                First(Sort(Filter(Booking,Walker.Value=User().FullName && Status.Value = "Upcoming" && Date > Now()),Date,SortOrder.Ascending)).Walker.Value = Blank(),true,false
+                )
+              Width: =216
+              X: =223
+              Y: =373
+        - Label27:
+            Control: Label
+            Properties:
+              Text: ="No Future Trip Found"
+              Align: =Align.Center
+              FontWeight: =FontWeight.Bold
+              Height: =99
+              Size: =20
+              Visible: |-
+                =If(
+                First(Sort(Filter(Booking,Walker.Value=User().FullName && Status.Value = "Upcoming" && Date > Now()),Date,SortOrder.Ascending)).Walker.Value = Blank(),true,false
+                )
+              Width: =463
+              X: =104
+              Y: =261
+        - Rectangle18:
+            Control: Rectangle
+            Properties:
+              Fill: =RGBA(214, 223, 238, 1)
+              Height: =545
+              Visible: |-
+                =If(
+                First(Sort(Filter(Booking,Walker.Value=User().FullName && Status.Value = "Upcoming" && Date > Now()),Date,SortOrder.Ascending)).Walker.Value = Blank(),true,false
+                )
+              Width: =647
+              X: =10
+              Y: =213
+    - gr_NextBooking_BS:
+        Control: Group
+        Children:
+        - Label24_10:
+            Control: Label
+            Properties:
+              Text: ="Address"
+              Tooltip: ="Appointment"
+              FontWeight: =FontWeight.Bold
+              Height: =37
+              Size: =18
+              Width: =201
+              X: =57
+              Y: =616
+        - Label24_9:
+            Control: Label
+            Properties:
+              Text: ="Owner"
+              Tooltip: ="Appointment"
+              FontWeight: =FontWeight.Bold
+              Height: =37
+              Size: =18
+              Width: =201
+              X: =57
+              Y: =566
+        - Label24_8:
+            Control: Label
+            Properties:
+              Text: ="Date & Time"
+              Tooltip: ="Appointment"
+              FontWeight: =FontWeight.Bold
+              Height: =37
+              Size: =18
+              Width: =201
+              X: =57
+              Y: =523
+        - Label24_7:
+            Control: Label
+            Properties:
+              Text: ="Walker"
+              Tooltip: ="Walker"
+              FontWeight: =FontWeight.Bold
+              Height: =37
+              Size: =18
+              Width: =201
+              X: =57
+              Y: =486
+        - Label24_6:
+            Control: Label
+            Properties:
+              Text: =LookUp(Dogs,Title= First(Sort(Filter(Booking,Walker.Value=User().FullName && Status.Value = "Upcoming" && Date > Now()),Date,SortOrder.Ascending)).Dog.Value).Address
+              Tooltip: ="Dog Address"
+              FontWeight: =FontWeight.Semibold
+              Height: =92
+              Size: =18
+              Width: =377
+              X: =258
+              Y: =601
+        - Label24_5:
+            Control: Label
+            Properties:
+              Text: =LookUp(Dogs,Title= First(Sort(Filter(Booking,Walker.Value=User().FullName && Status.Value = "Upcoming" && Date > Now()),Date,SortOrder.Ascending)).Dog.Value).Owner
+              Tooltip: ="Owner Name"
+              FontWeight: =FontWeight.Semibold
+              Height: =37
+              Size: =18
+              Width: =377
+              X: =258
+              Y: =566
+        - Label24_4:
+            Control: Label
+            Properties:
+              Text: =LookUp(Dogs,Title=First(Sort(Filter(Booking,Walker.Value=User().FullName && Status.Value = "Upcoming" && Date > Now()),Date,SortOrder.Ascending)).Dog.Value).Breed.Value
+              Tooltip: ="Breed"
+              Color: =RGBA(255, 255, 255, 1)
+              FontWeight: =FontWeight.Semibold
+              Height: =37
+              Size: =18
+              Width: =289
+              X: =346
+              Y: =388
+        - Label24_3:
+            Control: Label
+            Properties:
+              Text: =LookUp(Dogs,Title=First(Sort(Filter(Booking,Walker.Value=User().FullName && Status.Value = "Upcoming" && Date > Now()),Date,SortOrder.Ascending)).Dog.Value).Gender.Value
+              Tooltip: ="Gender"
+              Color: =RGBA(255, 255, 255, 1)
+              FontWeight: =FontWeight.Semibold
+              Height: =37
+              Size: =18
+              Width: =289
+              X: =346
+              Y: =323
+        - Label24_2:
+            Control: Label
+            Properties:
+              Text: =First(Sort(Filter(Booking,Walker.Value=User().FullName && Status.Value = "Upcoming" && Date > Now()),Date,SortOrder.Ascending)).Date
+              Tooltip: ="Appointment"
+              FontWeight: =FontWeight.Semibold
+              Height: =37
+              Size: =18
+              Width: =289
+              X: =258
+              Y: =523
+        - Label24_1:
+            Control: Label
+            Properties:
+              Text: =LookUp(Dogs,Title=First(Sort(Filter(Booking,Walker.Value=User().FullName && Status.Value = "Upcoming" && Date > Now()),Date,SortOrder.Ascending)).Dog.Value).Name
+              Tooltip: ="Dog"
+              Color: =RGBA(255, 255, 255, 1)
+              FontWeight: =FontWeight.Semibold
+              Height: =37
+              Size: =18
+              Width: =289
+              X: =346
+              Y: =258
+        - Label24:
+            Control: Label
+            Properties:
+              Text: =First(Sort(Filter(Booking,Walker.Value=User().FullName && Status.Value = "Upcoming" && Date > Now()),Date,SortOrder.Ascending)).Walker.Value
+              Tooltip: ="Walker"
+              FontWeight: =FontWeight.Semibold
+              Height: =37
+              Size: =18
+              Width: =289
+              X: =258
+              Y: =486
+        - Image10:
+            Control: Image
+            Properties:
+              Image: =LookUp(Dogs,Title=First(Sort(Filter(Booking,Walker.Value=User().FullName && Status.Value = "Upcoming" && Date > Now()),Date,SortOrder.Ascending)).Dog.Value).Photo
+              Height: =239
+              ImagePosition: =ImagePosition.Fill
+              RadiusBottomLeft: =80
+              RadiusBottomRight: =80
+              RadiusTopLeft: =80
+              RadiusTopRight: =80
+              Width: =268
+              X: =43
+              Y: =232
+        - Rectangle12:
+            Control: Rectangle
+            Properties:
+              BorderThickness: =3
+              Height: =239
+              Width: =605
+              X: =30
+              Y: =232
+        - Rectangle6_5:
+            Control: Rectangle
+            Properties:
+              BorderThickness: =2
+              Fill: =RGBA(0, 0, 0, 0)
+              Height: =545
+              Width: =647
+              X: =10
+              Y: =213
+        - Rectangle6_3:
+            Control: Rectangle
+            Properties:
+              Fill: =RGBA(214, 223, 238, 1)
+              Height: =546
+              Width: =647
+              X: =10
+              Y: =213
+    - gr_Heading_BS:
+        Control: Group
+        Children:
+        - Label19_1:
+            Control: Label
+            Properties:
+              Text: ="Your Future Bookings"
+              Align: =Align.Center
+              FontWeight: =FontWeight.Bold
+              Height: =91
+              Size: =25
+              Width: =624
+              X: =732
+              Y: =122
+        - Label19:
+            Control: Label
+            Properties:
+              Text: ="Your Next Booking"
+              Align: =Align.Center
+              FontWeight: =FontWeight.Bold
+              Height: =91
+              Size: =25
+              Width: =642
+              X: =15
+              Y: =122
+    - Button1:
+        Control: Classic/Button
+        Properties:
+          OnSelect: |-
+            =Patch(Booking,First(Sort(Filter(Booking,Walker.Value=User().FullName && Status.Value = "Upcoming" && Date > Now()),Date,SortOrder.Ascending)),{ 'Status': { Value: "Requested" } })
+          Text: |-
+            =If(
+            First(Sort(Filter(Booking,Walker.Value=User().FullName && Status.Value = "Upcoming"  && Date > Now()),Date,SortOrder.Ascending)).Status.Value = "Completed","Trip Completed",First(Sort(Filter(Booking,Walker.Value=User().FullName && Status.Value = "Upcoming" && Date > Now()),Date,SortOrder.Ascending)).Status.Value = "Requested","Requested to Completed","Mark Trip Complete")
+          DisplayMode: |+
+            =If(
+            First(Sort(Filter(Booking,Walker.Value=User().FullName && Status.Value = "Upcoming" && Date > Now()),Date,SortOrder.Ascending)).Status.Value = "Completed",DisplayMode.View,First(Sort(Filter(Booking,Walker.Value=User().FullName && Date > Now()),Date,SortOrder.Ascending)).Status.Value = "Requested",DisplayMode.View,DisplayMode.Edit)
+          Fill: |-
+            =If(
+            First(Sort(Filter(Booking,Walker.Value=User().FullName && Date > Now()),Date,SortOrder.Ascending)).Status.Value = "Completed",Color.Green,First(Sort(Filter(Booking,Walker.Value=User().FullName && Date > Now()),Date,SortOrder.Ascending)).Status.Value = "Requested",Color.Yellow,Color.Red)
+          Height: =62
+          HoverFill: =ColorFade(Self.BorderColor, -10%)
+          Size: =20
+          Width: =485
+          X: =90
+          Y: =680
+    - gr_Header_BS:
+        Control: Group
+        Children:
+        - Icon10:
+            Control: Classic/Icon
+            Variant: Reload
+            Properties:
+              OnSelect: |-
+                =Refresh(Booking);
+                Refresh(Trips);
+                Refresh(Dogs);
+                Refresh(Walkers);
+              Tooltip: ="Refresh Page"
+              Color: '=RGBA(204, 231, 246, 1) '
+              Height: =62
+              Icon: =Icon.Reload
+              X: =991
+              Y: =37
+        - icon_add_BS:
+            Control: Classic/Icon
+            Variant: Add
+            Properties:
+              OnSelect: =true
+              Color: =RGBA(204, 231, 246, 1)
+              Height: =72
+              Icon: =Icon.Add
+              Width: =84
+              X: =1064
+              Y: =35
+        - icon_back_BS:
+            Control: Classic/Icon
+            Variant: Undo
+            Properties:
+              OnSelect: =Back()
+              Color: =RGBA(204, 231, 246, 1)
+              Fill: |+
+                =RGBA(0, 0, 0, 0)
+              FocusedBorderThickness: =5
+              Height: =55
+              Icon: =Icon.Reset
+              Width: =84
+              X: =1154
+              Y: =43
+        - icon_home_BS:
+            Control: Classic/Icon
+            Variant: Home
+            Properties:
+              OnSelect: =Navigate('Home Screen')
+              Color: =RGBA(204, 231, 246, 1)
+              Height: =72
+              Icon: =Icon.Home
+              X: =1240
+              Y: =29
+        - label_main_BS:
+            Control: Label
+            Properties:
+              Text: ="Booking"
+              Color: =RGBA(255, 255, 255, 1)
+              FontWeight: =FontWeight.Bold
+              Height: =67
+              Size: =30
+              Width: =176
+              X: =35
+              Y: =29
+        - r_header_BS:
+            Control: Rectangle
+            Properties:
+              BorderThickness: =2
+              Fill: =RGBA(50, 86, 160, 1)
+              Height: =104
+              Width: =1345
+              X: =10
+              Y: =15
+    - gr_FutureBooking_BS:
+        Control: Group
+        Children:
+        - Label23_3:
+            Control: Label
+            Properties:
+              Text: ="Owner"
+              Align: =Align.Center
+              FontWeight: =FontWeight.Bold
+              Height: =41
+              Size: =20
+              Underline: =true
+              X: =1206
+              Y: =217
+        - Label23_2:
+            Control: Label
+            Properties:
+              Text: ="Dog"
+              Align: =Align.Center
+              FontWeight: =FontWeight.Bold
+              Height: =41
+              Size: =20
+              Underline: =true
+              X: =1056
+              Y: =217
+        - Label23_1:
+            Control: Label
+            Properties:
+              Text: ="Date"
+              Align: =Align.Center
+              FontWeight: =FontWeight.Bold
+              Height: =41
+              Size: =20
+              Underline: =true
+              X: =732
+              Y: =217
+        - Label23:
+            Control: Label
+            Properties:
+              Text: ="Walker"
+              Align: =Align.Center
+              FontWeight: =FontWeight.Bold
+              Height: =41
+              Size: =20
+              Underline: =true
+              X: =887
+              Y: =217
+        - Gallery2:
+            Control: Gallery
+            Variant: galleryVertical
+            Properties:
+              Items: =Sort(Filter(Booking,Date>Now() && Walker.Value = User().FullName && Status.Value = "Upcoming") ,Date,SortOrder.Ascending)
+              DelayItemLoading: =true
+              Height: =487
+              Layout: =Layout.Vertical
+              LoadingSpinner: =LoadingSpinner.Data
+              TemplateSize: =150
+              Transition: =Transition.Push
+              Width: =624
+              X: =732
+              Y: =271
+            Children:
+            - Image9_1:
+                Control: Image
+                Properties:
+                  OnSelect: =Select(Parent)
+                  Image: =LookUp(Dogs,Title = ThisItem.Dog.Value).Photo
+                  Tooltip: =ThisItem.Dog.Value
+                  Height: =102
+                  ImagePosition: =ImagePosition.Fill
+                  RadiusBottomLeft: =80
+                  RadiusBottomRight: =80
+                  RadiusTopLeft: =80
+                  RadiusTopRight: =80
+                  Width: =108
+                  X: =330
+                  Y: =22
+            - Image9:
+                Control: Image
+                Properties:
+                  OnSelect: =Select(Parent)
+                  Image: =LookUp(Walkers,'Name (KritiGoel)'= ThisItem.Walker.Value).Image
+                  Tooltip: =ThisItem.Walker.Value
+                  Height: =102
+                  ImagePosition: =ImagePosition.Fill
+                  RadiusBottomLeft: =80
+                  RadiusBottomRight: =80
+                  RadiusTopLeft: =80
+                  RadiusTopRight: =80
+                  Width: =108
+                  X: =163
+                  Y: =22
+            - Label22:
+                Control: Label
+                Properties:
+                  OnSelect: =Select(Parent)
+                  Text: =LookUp(Dogs,Title=ThisItem.Dog.Value).Owner
+                  FontWeight: =FontWeight.Semibold
+                  Size: =15
+                  X: =464
+                  Y: =40
+            - Label20:
+                Control: Label
+                Properties:
+                  OnSelect: =Select(Parent)
+                  Text: =ThisItem.Date
+                  Align: =Align.Center
+                  FontWeight: =FontWeight.Semibold
+                  Size: =15
+                  Y: =40
+            - Rectangle14:
+                Control: Rectangle
+                Properties:
+                  OnSelect: =Select(Parent)
+                  BorderThickness: =If(ThisItem.IsSelected, 2,0)
+                  Fill: =If(ThisItem.IsSelected, RGBA(153, 207, 236, 1.2),RGBA(153, 207, 236, .7))
+                  Height: =140
+                  HoverFill: =If(ThisItem.IsSelected, RGBA(153, 207, 236, 1.2),RGBA(153, 207, 236, .5))
+                  Width: =604
+                  X: =5
+                  Y: =5
+        - Rectangle6_6:
+            Control: Rectangle
+            Properties:
+              BorderThickness: =2
+              Fill: =RGBA(0, 0, 0, 0)
+              Height: =546
+              Width: =624
+              X: =732
+              Y: =213
+        - Rectangle6_4:
+            Control: Rectangle
+            Properties:
+              Fill: =RGBA(214, 223, 238, 1)
+              Height: =546
+              Width: =624
+              X: =732
+              Y: =213
