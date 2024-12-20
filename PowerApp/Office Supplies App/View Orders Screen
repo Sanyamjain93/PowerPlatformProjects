@@ -1,0 +1,147 @@
+- Existing Order:
+    Control: Screen
+    Properties:
+      BackgroundImage: =sc_background
+      ImagePosition: =ImagePosition.Fill
+    Children:
+    - T_user_EO:
+        Control: Label
+        Properties:
+          Text: =If(Tog_onoff_EO.Value=true,"Showing " &User().FullName &" Order","Showing all Users Order")
+          FontWeight: =FontWeight.Bold
+          Height: =32
+          Size: =14
+          Width: =242
+          X: =971
+          Y: =166
+    - T_Ordertable_EO:
+        Control: DataTable
+        Variant: datatable
+        Properties:
+          Items: =If(Tog_onoff_EO.Value=false,Orderheader,Filter(Orderheader,Title=User().Email))
+          FontWeight: =FontWeight.Bold
+          HeadingFontWeight: =FontWeight.Bold
+          HeadingSize: =17
+          Height: =491
+          Size: =17
+          Width: =1323
+          X: =28
+          Y: =212
+        Children:
+        - C_status_EO:
+            Control: DataTableColumn
+            Variant: textualColumn
+            Properties:
+              FieldDisplayName: ="Status"
+              FieldName: ="Status"
+              Order: =6
+              Text: =ThisItem.Status.Value
+        - C_amount_EO:
+            Control: DataTableColumn
+            Variant: textualColumn
+            Properties:
+              FieldDisplayName: ="Amount"
+              FieldName: ="Amount"
+              Order: =5
+              Text: =ThisItem.Amount
+        - C_date_EO:
+            Control: DataTableColumn
+            Variant: textualColumn
+            Properties:
+              FieldDisplayName: ="Order Date"
+              FieldName: ="OrderDate"
+              Order: =4
+              Text: =ThisItem.'Order Date'
+        - C_name_EO:
+            Control: DataTableColumn
+            Variant: textualColumn
+            Properties:
+              FieldDisplayName: ="Orderer"
+              FieldName: ="Orderer"
+              Order: =3
+              Text: =ThisItem.Orderer
+        - C_id_EO:
+            Control: DataTableColumn
+            Variant: numberColumn
+            Properties:
+              AutoWidth: =false
+              FieldDisplayName: ="Order ID"
+              FieldName: ="OrderID"
+              Order: =2
+              Text: =ThisItem.'Order ID'
+              Width: =128
+        - C_email_EO:
+            Control: DataTableColumn
+            Variant: textualColumn
+            Properties:
+              AutoWidth: =false
+              FieldDisplayName: ="Title"
+              FieldName: ="Title"
+              Order: =1
+              Text: =ThisItem.Title
+              Width: =273
+    - Tog_onoff_EO:
+        Control: Classic/Toggle
+        Properties:
+          Height: =32
+          X: =1240
+          Y: =166
+    - grHeader_EO:
+        Control: Group
+        Children:
+        - Icon_EO:
+            Control: Classic/Icon
+            Variant: Home
+            Properties:
+              OnSelect: =Navigate(Home,ScreenTransition.Fade)
+              Height: =109
+              Icon: =Icon.Home
+              Width: =91
+              X: =15
+              Y: =17
+        - user_Label_EO:
+            Control: Label
+            Properties:
+              Text: ="Hello " & User().FullName
+              Color: =RGBA(255, 255, 255, 1)
+              FontWeight: =FontWeight.Bold
+              Height: =70
+              PaddingLeft: =10
+              PaddingRight: =10
+              Size: =30
+              Width: =438
+              X: =914
+              Y: =80
+        - header_Label_EO:
+            Control: Label
+            Properties:
+              Text: |-
+                ="Existing Order Screen
+                "
+              Color: =RGBA(255, 255, 255, 1)
+              FontWeight: =FontWeight.Bold
+              Height: =88
+              PaddingLeft: =40
+              Size: =50
+              Width: =862
+              X: =96
+              Y: =25
+        - app_Label_EO:
+            Control: Label
+            Properties:
+              Text: |-
+                ="Office Supplies App
+                "
+              Color: =RGBA(255, 255, 255, 1)
+              FontWeight: =FontWeight.Bold
+              Height: =67
+              PaddingLeft: =10
+              PaddingRight: =10
+              Size: =30
+              Width: =437
+              X: =914
+        - rect_EO:
+            Control: Rectangle
+            Properties:
+              Height: =150
+              Width: =1366
