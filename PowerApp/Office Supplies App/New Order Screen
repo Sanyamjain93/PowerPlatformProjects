@@ -1,0 +1,800 @@
+- New Order:
+    Control: Screen
+    Properties:
+      BackgroundImage: =sc_background
+      Fill: =RGBA(255,255,255,1)
+      ImagePosition: =ImagePosition.Fill
+    Children:
+    - gr_popup_NO:
+        Control: Group
+        Children:
+        - F_pop_NO:
+            Control: Form
+            Layout: vertical
+            Properties:
+              OnFailure: =Notify("Error",NotificationType.Error)
+              OnSuccess: |-
+                =UpdateContext({L_show_popup:false});
+                Navigate(Home);
+                Notify("Success", NotificationType.Success);
+                Clear(colCustom);
+                UpdateContext({L_cart:0});
+                Set(G_price,0);
+                ResetForm(F_pop_NO);
+                NewForm(F_pop_NO);
+              DataSource: =Orderheader
+              DefaultMode: =FormMode.New
+              BorderThickness: =5
+              Height: =400
+              Visible: =L_show_popup
+              Width: =451
+              X: =776
+              Y: =176
+            Children:
+            - Title_DataCard1:
+                Control: TypedDataCard
+                Variant: textualEditCard
+                Properties:
+                  DataField: ="Title"
+                  Default: =User().Email
+                  DisplayName: =DataSourceInfo([@Orderheader],DataSourceInfo.DisplayName,Title)
+                  MaxLength: =DataSourceInfo([@Orderheader], DataSourceInfo.MaxLength, Title)
+                  Update: =DataCardValue1.Text
+                  Height: =50
+                  Width: =446
+                Children:
+                - StarVisible1:
+                    Control: Label
+                    Properties:
+                      Text: ="*"
+                      Align: =Align.Center
+                      Height: =DataCardKey1.Height
+                      Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                      Width: =30
+                      Wrap: =false
+                      Y: =DataCardKey1.Y
+                - ErrorMessage1:
+                    Control: Label
+                    Properties:
+                      Live: =Live.Assertive
+                      Text: =Parent.Error
+                      AutoHeight: =true
+                      Height: =10
+                      PaddingBottom: =0
+                      PaddingLeft: =0
+                      PaddingRight: =0
+                      PaddingTop: =0
+                      Visible: =Parent.DisplayMode=DisplayMode.Edit
+                      Width: =Parent.Width - 60
+                      X: =30
+                      Y: =DataCardValue1.Y + DataCardValue1.Height
+                - DataCardValue1:
+                    Control: Classic/TextInput
+                    Properties:
+                      Default: =Parent.Default
+                      DelayOutput: =true
+                      MaxLength: =Parent.MaxLength
+                      Tooltip: =Parent.DisplayName
+                      BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                      DisplayMode: =Parent.DisplayMode
+                      PaddingLeft: =5
+                      RadiusBottomLeft: =0
+                      RadiusBottomRight: =0
+                      RadiusTopLeft: =0
+                      RadiusTopRight: =0
+                      Width: =Parent.Width - 60
+                      X: =30
+                      Y: =DataCardKey1.Y + DataCardKey1.Height + 5
+                - DataCardKey1:
+                    Control: Label
+                    Properties:
+                      Text: ="Email"
+                      AutoHeight: =true
+                      FontWeight: =FontWeight.Bold
+                      Height: =34
+                      Size: =15
+                      Width: =Parent.Width - 60
+                      Wrap: =false
+                      X: =30
+                      Y: =10
+            - Order ID_DataCard1:
+                Control: TypedDataCard
+                Variant: numberEditCard
+                Properties:
+                  DataField: ="OrderID"
+                  Default: =First(Sort(Orderheader,Value(ID),SortOrder.Descending)).ID +1
+                  DisplayName: =DataSourceInfo([@Orderheader],DataSourceInfo.DisplayName,'Order ID')
+                  Required: =true
+                  Update: =Value(DataCardValue2.Text)
+                  DisplayMode: =DisplayMode.View
+                  Height: =50
+                  Width: =446
+                  Y: =1
+                Children:
+                - StarVisible2:
+                    Control: Label
+                    Properties:
+                      Text: ="*"
+                      Align: =Align.Center
+                      Height: =DataCardKey2.Height
+                      Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                      Width: =30
+                      Wrap: =false
+                      Y: =DataCardKey2.Y
+                - ErrorMessage2:
+                    Control: Label
+                    Properties:
+                      Live: =Live.Assertive
+                      Text: =Parent.Error
+                      AutoHeight: =true
+                      Height: =10
+                      PaddingBottom: =0
+                      PaddingLeft: =0
+                      PaddingRight: =0
+                      PaddingTop: =0
+                      Visible: =Parent.DisplayMode=DisplayMode.Edit
+                      Width: =Parent.Width - 60
+                      X: =30
+                      Y: =DataCardValue2.Y + DataCardValue2.Height
+                - DataCardValue2:
+                    Control: Classic/TextInput
+                    Properties:
+                      Default: =Parent.Default
+                      DelayOutput: =true
+                      Tooltip: =Parent.DisplayName
+                      BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                      DisplayMode: =Parent.DisplayMode
+                      Format: =TextFormat.Number
+                      PaddingLeft: =5
+                      RadiusBottomLeft: =0
+                      RadiusBottomRight: =0
+                      RadiusTopLeft: =0
+                      RadiusTopRight: =0
+                      Width: =Parent.Width - 60
+                      X: =30
+                      Y: =DataCardKey2.Y + DataCardKey2.Height + 5
+                - DataCardKey2:
+                    Control: Label
+                    Properties:
+                      Text: =Parent.DisplayName
+                      AutoHeight: =true
+                      FontWeight: =FontWeight.Bold
+                      Height: =34
+                      Size: =15
+                      Width: =Parent.Width - 60
+                      Wrap: =false
+                      X: =30
+                      Y: =10
+            - Orderer_DataCard1:
+                Control: TypedDataCard
+                Variant: textualEditCard
+                Properties:
+                  DataField: ="Orderer"
+                  Default: =User().FullName
+                  DisplayName: =DataSourceInfo([@Orderheader],DataSourceInfo.DisplayName,Orderer)
+                  MaxLength: =DataSourceInfo([@Orderheader], DataSourceInfo.MaxLength, Orderer)
+                  Update: =DataCardValue3.Text
+                  Height: =50
+                  Width: =446
+                  Y: =2
+                Children:
+                - StarVisible3:
+                    Control: Label
+                    Properties:
+                      Text: ="*"
+                      Align: =Align.Center
+                      Height: =DataCardKey3.Height
+                      Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                      Width: =30
+                      Wrap: =false
+                      Y: =DataCardKey3.Y
+                - ErrorMessage3:
+                    Control: Label
+                    Properties:
+                      Live: =Live.Assertive
+                      Text: =Parent.Error
+                      AutoHeight: =true
+                      Height: =10
+                      PaddingBottom: =0
+                      PaddingLeft: =0
+                      PaddingRight: =0
+                      PaddingTop: =0
+                      Visible: =Parent.DisplayMode=DisplayMode.Edit
+                      Width: =Parent.Width - 60
+                      X: =30
+                      Y: =DataCardValue3.Y + DataCardValue3.Height
+                - DataCardValue3:
+                    Control: Classic/TextInput
+                    Properties:
+                      Default: =Parent.Default
+                      DelayOutput: =true
+                      MaxLength: =Parent.MaxLength
+                      Tooltip: =Parent.DisplayName
+                      BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                      DisplayMode: =Parent.DisplayMode
+                      PaddingLeft: =5
+                      RadiusBottomLeft: =0
+                      RadiusBottomRight: =0
+                      RadiusTopLeft: =0
+                      RadiusTopRight: =0
+                      Width: =Parent.Width - 60
+                      X: =30
+                      Y: =DataCardKey3.Y + DataCardKey3.Height + 5
+                - DataCardKey3:
+                    Control: Label
+                    Properties:
+                      Text: =Parent.DisplayName
+                      AutoHeight: =true
+                      FontWeight: =FontWeight.Bold
+                      Height: =34
+                      Size: =15
+                      Width: =Parent.Width - 60
+                      Wrap: =false
+                      X: =30
+                      Y: =10
+            - Order Date_DataCard1:
+                Control: TypedDataCard
+                Variant: dateEditCard
+                Properties:
+                  DataField: ="OrderDate"
+                  Default: =Today()
+                  DisplayName: =DataSourceInfo([@Orderheader],DataSourceInfo.DisplayName,'Order Date')
+                  Required: =true
+                  Update: =DataCardValue4.SelectedDate
+                  DisplayMode: =Parent.DisplayMode
+                  Height: =50
+                  Width: =446
+                  Y: =3
+                Children:
+                - StarVisible4:
+                    Control: Label
+                    Properties:
+                      Text: ="*"
+                      Align: =Align.Center
+                      Height: =DataCardKey4.Height
+                      Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                      Width: =30
+                      Wrap: =false
+                      Y: =DataCardKey4.Y
+                - ErrorMessage4:
+                    Control: Label
+                    Properties:
+                      Live: =Live.Assertive
+                      Text: =Parent.Error
+                      AutoHeight: =true
+                      Height: =10
+                      PaddingBottom: =0
+                      PaddingLeft: =0
+                      PaddingRight: =0
+                      PaddingTop: =0
+                      Visible: =Parent.DisplayMode=DisplayMode.Edit
+                      Width: =Parent.Width - 60
+                      X: =30
+                      Y: =DataCardValue4.Y + DataCardValue4.Height
+                - DataCardValue4:
+                    Control: Classic/DatePicker
+                    Properties:
+                      DefaultDate: =Parent.Default
+                      EndYear: =Year(Today())+100
+                      StartYear: =1899
+                      Tooltip: =Parent.DisplayName
+                      BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                      DisplayMode: =Parent.DisplayMode
+                      IsEditable: =true
+                      PaddingBottom: =0
+                      PaddingLeft: =If(Self.DisplayMode = DisplayMode.Edit, 5, 0)
+                      Width: =Parent.Width - 60
+                      X: =30
+                      Y: =DataCardKey4.Y + DataCardKey4.Height + 5
+                - DataCardKey4:
+                    Control: Label
+                    Properties:
+                      Text: =Parent.DisplayName
+                      AutoHeight: =true
+                      FontWeight: =FontWeight.Bold
+                      Height: =34
+                      Size: =15
+                      Width: =Parent.Width - 60
+                      Wrap: =false
+                      X: =30
+                      Y: =10
+            - Amount_DataCard1:
+                Control: TypedDataCard
+                Variant: textualEditCard
+                Properties:
+                  DataField: ="Amount"
+                  Default: =G_price
+                  DisplayName: =DataSourceInfo([@Orderheader],DataSourceInfo.DisplayName,Amount)
+                  MaxLength: =DataSourceInfo([@Orderheader], DataSourceInfo.MaxLength, Amount)
+                  Update: =DataCardValue5.Text
+                  DisplayMode: =DisplayMode.View
+                  Height: =50
+                  Width: =446
+                  Y: =4
+                Children:
+                - StarVisible5:
+                    Control: Label
+                    Properties:
+                      Text: ="*"
+                      Align: =Align.Center
+                      Height: =DataCardKey5.Height
+                      Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                      Width: =30
+                      Wrap: =false
+                      Y: =DataCardKey5.Y
+                - ErrorMessage5:
+                    Control: Label
+                    Properties:
+                      Live: =Live.Assertive
+                      Text: =Parent.Error
+                      AutoHeight: =true
+                      Height: =10
+                      PaddingBottom: =0
+                      PaddingLeft: =0
+                      PaddingRight: =0
+                      PaddingTop: =0
+                      Visible: =Parent.DisplayMode=DisplayMode.Edit
+                      Width: =Parent.Width - 60
+                      X: =30
+                      Y: =DataCardValue5.Y + DataCardValue5.Height
+                - DataCardValue5:
+                    Control: Classic/TextInput
+                    Properties:
+                      Default: =Parent.Default
+                      DelayOutput: =true
+                      MaxLength: =Parent.MaxLength
+                      Tooltip: =Parent.DisplayName
+                      BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                      DisplayMode: =Parent.DisplayMode
+                      PaddingLeft: =5
+                      RadiusBottomLeft: =0
+                      RadiusBottomRight: =0
+                      RadiusTopLeft: =0
+                      RadiusTopRight: =0
+                      Width: =Parent.Width - 60
+                      X: =30
+                      Y: =DataCardKey5.Y + DataCardKey5.Height + 5
+                - DataCardKey5:
+                    Control: Label
+                    Properties:
+                      Text: =Parent.DisplayName
+                      AutoHeight: =true
+                      FontWeight: =FontWeight.Bold
+                      Height: =34
+                      Size: =15
+                      Width: =Parent.Width - 60
+                      Wrap: =false
+                      X: =30
+                      Y: =10
+            - Status_DataCard2:
+                Control: TypedDataCard
+                Variant: comboBoxEditCard
+                Properties:
+                  DataField: ="Status"
+                  Default: =If(G_price>49,{value:"To be Approved"},{value:"In Progress"})
+                  DisplayName: =DataSourceInfo([@Orderheader],DataSourceInfo.DisplayName,Status)
+                  Update: =DataCardValue7.Selected
+                  Height: =50
+                  Width: =451
+                  Y: =5
+                Children:
+                - StarVisible7:
+                    Control: Label
+                    Properties:
+                      Text: ="*"
+                      Align: =Align.Center
+                      Height: =DataCardKey7.Height
+                      Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                      Width: =30
+                      Wrap: =false
+                      Y: =DataCardKey7.Y
+                - ErrorMessage7:
+                    Control: Label
+                    Properties:
+                      Live: =Live.Assertive
+                      Text: =Parent.Error
+                      AutoHeight: =true
+                      Height: =10
+                      PaddingBottom: =0
+                      PaddingLeft: =0
+                      PaddingRight: =0
+                      PaddingTop: =0
+                      Visible: =Parent.DisplayMode=DisplayMode.Edit
+                      Width: =Parent.Width - 60
+                      X: =30
+                      Y: =DataCardValue7.Y + DataCardValue7.Height
+                - DataCardValue7:
+                    Control: Classic/ComboBox
+                    Properties:
+                      DefaultSelectedItems: =Parent.Default
+                      DisplayFields: =["Value"]
+                      Items: =Choices([@Orderheader].Status)
+                      SearchFields: =["Value"]
+                      SelectMultiple: =false
+                      Tooltip: =Parent.DisplayName
+                      BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                      DisplayMode: =Parent.DisplayMode
+                      PaddingLeft: =If(Self.DisplayMode = DisplayMode.Edit, 5, 0)
+                      Width: =Parent.Width - 60
+                      X: =30
+                      Y: =DataCardKey7.Y + DataCardKey7.Height + 5
+                - DataCardKey7:
+                    Control: Label
+                    Properties:
+                      Text: =Parent.DisplayName
+                      AutoHeight: =true
+                      Height: =34
+                      Width: =Parent.Width - 60
+                      Wrap: =false
+                      X: =30
+                      Y: =10
+        - Gallery1:
+            Control: Gallery
+            Variant: galleryVertical
+            Properties:
+              Items: =colCustom
+              BorderThickness: =5
+              DelayItemLoading: =true
+              Height: =497
+              Layout: =Layout.Vertical
+              LoadingSpinner: =LoadingSpinner.Data
+              TemplateSize: =100
+              Visible: =L_show_popup
+              Width: =614
+              X: =60
+              Y: =177
+            Children:
+            - Icon1:
+                Control: Classic/Icon
+                Variant: Trash
+                Properties:
+                  OnSelect: |-
+                    =Remove(colCustom,ThisItem);
+                    UpdateContext({L_cart:L_cart-1});
+                    Set(G_price,G_price-ThisItem.Price);
+                  Color: =RGBA(172, 62, 11, 1)
+                  Height: =52
+                  Icon: =Icon.Trash
+                  Width: =49
+                  X: =503
+                  Y: =20
+            - Label8:
+                Control: Label
+                Properties:
+                  OnSelect: =Select(Parent)
+                  Text: =ThisItem.Price & " USD"
+                  FontWeight: =FontWeight.Bold
+                  Size: =17
+                  Width: =102
+                  X: =240
+                  Y: =24
+            - Label7:
+                Control: Label
+                Properties:
+                  OnSelect: =Select(Parent)
+                  Text: =ThisItem.ItemName
+                  FontWeight: =FontWeight.Bold
+                  Height: =42
+                  Size: =17
+                  Width: =117
+                  X: =14
+                  Y: =26
+        - Label6:
+            Control: Label
+            Properties:
+              Text: ="Please fill the details before proceeding"
+              FontWeight: =FontWeight.Bold
+              Height: =70
+              Size: =17
+              Visible: =L_show_popup
+              Width: =483
+              X: =776
+              Y: =90
+        - Label5:
+            Control: Label
+            Properties:
+              Text: =L_cart & " Items - " & G_price & " USD"
+              FontWeight: =FontWeight.Bold
+              Height: =34
+              Size: =17
+              Visible: =L_show_popup
+              Width: =400
+              X: =229
+              Y: =131
+        - Label3:
+            Control: Label
+            Properties:
+              Text: ="Choosen Item & Price"
+              FontWeight: =FontWeight.Bold
+              Height: =36
+              Size: =17
+              Visible: =L_show_popup
+              Width: =489
+              X: =211
+              Y: =90
+        - Button3:
+            Control: Classic/Button
+            Properties:
+              OnSelect: =UpdateContext({L_show_popup:false})
+              Text: ="Keep Shopping"
+              Fill: =RGBA(246, 88, 16, 1)
+              Height: =80
+              RadiusBottomLeft: =100
+              RadiusBottomRight: =100
+              RadiusTopLeft: =100
+              RadiusTopRight: =100
+              Visible: =L_show_popup
+              Width: =227
+              X: =752
+              Y: =609
+        - Button2:
+            Control: Classic/Button
+            Properties:
+              OnSelect: =SubmitForm(F_pop_NO);
+              Text: ="Complete Order"
+              Fill: =RGBA(54, 176, 75, 1)
+              Height: =80
+              RadiusBottomLeft: =100
+              RadiusBottomRight: =100
+              RadiusTopLeft: =100
+              RadiusTopRight: =100
+              Visible: =L_show_popup
+              Width: =207
+              X: =1052
+              Y: =609
+        - Rectangle4:
+            Control: Rectangle
+            Properties:
+              Fill: =RGBA(251, 188, 159, 1)
+              Height: =688
+              Visible: =L_show_popup
+              Width: =1286
+              X: =40
+              Y: =40
+        - Rectangle3:
+            Control: Rectangle
+            Properties:
+              BorderColor: =RGBA(0, 0, 0, 1)
+              Fill: =RGBA(255, 255, 255, .75)
+              Height: =768
+              Visible: =L_show_popup
+              Width: =1366
+    - gr_cart_NO:
+        Control: Group
+        Children:
+        - Label4:
+            Control: Label
+            Properties:
+              Text: =G_price & " USD"
+              Align: =Align.Center
+              FontWeight: =FontWeight.Bold
+              Height: =56
+              Size: =16
+              Visible: =L_cart >0
+              Width: =109
+              X: =915
+              Y: =634
+        - T_cat_NOS:
+            Control: Label
+            Properties:
+              Text: =If (L_cart < 2, L_cart & " Item", L_cart & " Items")
+              Align: =Align.Center
+              FontWeight: =FontWeight.Bold
+              Height: =56
+              Size: =16
+              Visible: =L_cart >0
+              Width: =109
+              X: =915
+              Y: =594
+        - I_cart_NOS:
+            Control: Image
+            Properties:
+              Image: =cart
+              Height: =208
+              ImagePosition: =ImagePosition.Fill
+              Transparency: =0.7
+              Width: =250
+              X: =822
+              Y: =547
+    - B_confirmorder_NOS:
+        Control: Classic/Button
+        Properties:
+          OnSelect: =UpdateContext({L_show_popup:true});
+          Text: ="Confirm Order"
+          BorderThickness: =5
+          DisplayMode: =If(L_cart >0,DisplayMode.Edit, DisplayMode.Disabled)
+          Height: =120
+          RadiusBottomLeft: =100
+          RadiusBottomRight: =100
+          RadiusTopLeft: =100
+          RadiusTopRight: =100
+          Size: =23
+          Width: =247
+          X: =1084
+          Y: =591
+    - B_clearcart_NOS:
+        Control: Classic/Button
+        Properties:
+          OnSelect: |-
+            =UpdateContext({L_cart : 0});
+            Set(G_price, 0);
+            ClearCollect(colCustom,[]);
+            //ResetForm(F_pop_NO);
+            //NewForm(F_pop_NO);
+          Text: ="Clear Cart"
+          BorderThickness: =5
+          DisplayMode: =If(L_cart >0,DisplayMode.Edit, DisplayMode.Disabled)
+          Height: =120
+          RadiusBottomLeft: =100
+          RadiusBottomRight: =100
+          RadiusTopLeft: =100
+          RadiusTopRight: =100
+          Size: =24
+          Width: =247
+          X: =559
+          Y: =594
+    - Gallery_NOS:
+        Control: Gallery
+        Variant: galleryHorizontal
+        Properties:
+          OnSelect: |-
+            =UpdateContext({Qty: 0});
+          Items: =Filter(colItem, 'Category Id' = Gallery_H_NOS.Selected.CategoryId)
+          BorderColor: |+
+            =RGBA(32, 54, 71, 1)
+          BorderThickness: =4
+          DelayItemLoading: =true
+          Height: =377
+          LoadingSpinner: =LoadingSpinner.Data
+          TemplateSize: =244
+          Width: =819
+          X: =532
+          Y: =170
+        Children:
+        - B_select_NO:
+            Control: Classic/Button
+            Properties:
+              OnSelect: |-
+                =UpdateContext({L_cart: L_cart + 1});
+                UpdateContext({Qty:1});
+                Set(
+                    G_price,
+                    G_price + ThisItem.Price
+                );
+                Collect(colCustom,{ItemID:ThisItem.'Item Id',ItemName:ThisItem.Title,Price:ThisItem.Price,Qty:Qty});
+                //If(LookUp(colCustom,ThisItem.'Item Id' = ItemID,Qty)>0,RemoveIf(colCustom,ItemID=ThisItem.'Item Id'),)
+              Text: =If(ThisItem.IsSelected,"Selected","Select")
+              FontWeight: =FontWeight.Bold
+              Size: =20
+              X: =23
+              Y: =292
+        - T_price_NO:
+            Control: Label
+            Properties:
+              OnSelect: =Select(Parent)
+              Text: ="Price " & ThisItem.Price &" $"
+              FontWeight: =FontWeight.Bold
+              Height: =27
+              Size: =20
+              Width: =201
+              X: =36
+              Y: =234
+        - I_image_NO:
+            Control: Image
+            Properties:
+              OnSelect: =Select(Parent)
+              Image: =ThisItem.Image
+              Height: =114
+              Width: =147
+              X: =36
+              Y: =9
+        - T_name_NO:
+            Control: Label
+            Properties:
+              OnSelect: =Select(Parent)
+              Text: =ThisItem.Title
+              Align: =Align.Center
+              FontWeight: =FontWeight.Bold
+              Height: =61
+              PaddingBottom: =10
+              PaddingLeft: =10
+              PaddingRight: =10
+              PaddingTop: =10
+              Size: =20
+              Width: =232
+              X: =6
+              Y: =153
+    - grHeader_NOS:
+        Control: Group
+        Children:
+        - Icon_NO:
+            Control: Classic/Icon
+            Variant: Home
+            Properties:
+              OnSelect: =Navigate(Home,ScreenTransition.Fade)
+              Height: =109
+              Icon: =Icon.Home
+              Width: =91
+              X: =15
+              Y: =17
+        - user_Label_NO:
+            Control: Label
+            Properties:
+              Text: ="Hello " & User().FullName
+              Color: =RGBA(255, 255, 255, 1)
+              FontWeight: =FontWeight.Bold
+              Height: =70
+              PaddingLeft: =10
+              PaddingRight: =10
+              Size: =30
+              Width: =438
+              X: =914
+              Y: =80
+        - header_Label_NO:
+            Control: Label
+            Properties:
+              Text: |-
+                ="New Order Screen
+                "
+              Color: =RGBA(255, 255, 255, 1)
+              FontWeight: =FontWeight.Bold
+              Height: =67
+              PaddingLeft: =40
+              Size: =50
+              Width: =862
+              X: =96
+              Y: =38
+        - app_Label_NO:
+            Control: Label
+            Properties:
+              Text: |-
+                ="Office Supplies App
+                "
+              Color: =RGBA(255, 255, 255, 1)
+              FontWeight: =FontWeight.Bold
+              Height: =67
+              PaddingLeft: =10
+              PaddingRight: =10
+              Size: =30
+              Width: =437
+              X: =914
+        - rect_NO:
+            Control: Rectangle
+            Properties:
+              Height: =150
+              Width: =1366
+    - Gallery_H_NOS:
+        Control: Gallery
+        Variant: galleryVertical
+        Properties:
+          OnSelect: =Reset(Gallery_NOS);
+          Items: =colCat
+          BorderThickness: =4
+          DelayItemLoading: =true
+          Height: =594
+          Layout: =Layout.Vertical
+          LoadingSpinner: =LoadingSpinner.Data
+          TemplateFill: =If(ThisItem.IsSelected, RGBA(168,0,0,.25),Color.Transparent)
+          TemplateSize: =122
+          Width: =484
+          X: =22
+          Y: =161
+        Children:
+        - Label_gal1_nos:
+            Control: Label
+            Properties:
+              OnSelect: =Select(Parent)
+              Text: =ThisItem.Title
+              FontWeight: =FontWeight.Bold
+              Height: =73
+              Size: =20
+              Width: =337
+              X: =179
+              Y: =15
+        - Image_gal1_nos:
+            Control: Image
+            Properties:
+              OnSelect: =Select(Parent)
+              Image: =ThisItem.CategoryImage
+              X: =25
+              Y: =15
