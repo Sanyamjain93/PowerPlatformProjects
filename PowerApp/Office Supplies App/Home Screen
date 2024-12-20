@@ -1,0 +1,142 @@
+- Home:
+    Control: Screen
+    Properties:
+      OnVisible: |-
+        =Set(G_overlay,true);
+        ClearCollect(colCat,Categories);
+        ClearCollect(colItem,Items);
+        ResetForm(F_pop_NO);
+        NewForm(F_pop_NO);
+        Set(G_overlay,false);
+        ClearCollect(colHeader,Orderheader);
+        Set(LastItemId, Last(Orderheader).'Order ID');
+        LastItemId = LastItemId +1;
+      BackgroundImage: =sc_background
+      ImagePosition: =ImagePosition.Fill
+    Children:
+    - gr_Overlay_HS:
+        Control: Group
+        Children:
+        - Label2:
+            Control: Label
+            Properties:
+              Text: ="Loading..."
+              Align: =Align.Center
+              DisabledColor: =RGBA(32, 54, 71, 1)
+              FontWeight: =FontWeight.Bold
+              Height: =768
+              Size: =75
+              Visible: =G_overlay
+              Width: =1366
+        - Rectangle2:
+            Control: Rectangle
+            Properties:
+              Fill: =RGBA(255, 255, 255, .75)
+              Height: =768
+              Visible: =G_overlay
+              Width: =1366
+    - I_home_HS:
+        Control: Image
+        Properties:
+          Image: ='157677192'
+          Height: =464
+          ImagePosition: =ImagePosition.Fill
+          Transparency: =0.4
+          Width: =509
+          X: =818
+          Y: =242
+    - B_vieweorder_HS:
+        Control: Classic/Button
+        Properties:
+          OnSelect: =Navigate('Existing Order',ScreenTransition.Fade)
+          Text: ="View Order"
+          BorderThickness: =5
+          Height: =214
+          RadiusBottomLeft: =100
+          RadiusBottomRight: =100
+          RadiusTopLeft: =100
+          RadiusTopRight: =100
+          Size: =25
+          Width: =345
+          X: =262
+          Y: =514
+    - B_createorder_HS:
+        Control: Classic/Button
+        Properties:
+          OnSelect: |-
+            =Navigate('New Order',ScreenTransition.Fade);
+            Reset(Gallery_NOS);
+            Reset(Gallery_H_NOS);
+          Text: |-
+            ="Create Order
+            "
+          BorderThickness: =5
+          Height: =214
+          RadiusBottomLeft: =100
+          RadiusBottomRight: =100
+          RadiusTopLeft: =100
+          RadiusTopRight: =100
+          Size: =25
+          Width: =346
+          X: =96
+          Y: =264
+    - grHeader_HS:
+        Control: Group
+        Children:
+        - Icon_HS:
+            Control: Classic/Icon
+            Variant: Home
+            Properties:
+              OnSelect: =Navigate(Home,ScreenTransition.None)
+              Height: =109
+              Icon: =Icon.Home
+              Visible: =false
+              Width: =91
+              X: =15
+              Y: =17
+        - user_Label_HS:
+            Control: Label
+            Properties:
+              Text: ="Hello " & User().FullName
+              Color: =RGBA(255, 255, 255, 1)
+              FontWeight: =FontWeight.Bold
+              Height: =70
+              PaddingLeft: =10
+              PaddingRight: =10
+              Size: =30
+              Width: =438
+              X: =914
+              Y: =80
+        - header_Label_HS:
+            Control: Label
+            Properties:
+              Text: |-
+                ="Please Make a Choice
+                "
+              Color: =RGBA(255, 255, 255, 1)
+              FontWeight: =FontWeight.Bold
+              Height: =67
+              PaddingLeft: =40
+              Size: =50
+              Width: =862
+              X: =96
+              Y: =38
+        - app_Label_HS:
+            Control: Label
+            Properties:
+              Text: |-
+                ="Office Supplies App
+                "
+              Color: =RGBA(255, 255, 255, 1)
+              FontWeight: =FontWeight.Bold
+              Height: =67
+              PaddingLeft: =10
+              PaddingRight: =10
+              Size: =30
+              Width: =437
+              X: =914
+        - rect_HS:
+            Control: Rectangle
+            Properties:
+              Height: =150
+              Width: =1366
