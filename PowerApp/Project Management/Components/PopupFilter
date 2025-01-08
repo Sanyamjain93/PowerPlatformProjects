@@ -1,0 +1,367 @@
+- PopupFilter:
+    Control: Component
+    Properties:
+      Fill: =RGBA(0, 0, 0, .11)
+      Height: =App.Height
+      Width: =App.Width
+    Children:
+    - Container20:
+        Control: GroupContainer
+        Variant: verticalAutoLayoutContainer
+        Properties:
+          BorderStyle: =BorderStyle.None
+          DropShadow: =DropShadow.None
+          Fill: =RGBA(255, 255, 255, 1)
+          Height: =Min(Parent.Height *95%,730)
+          LayoutDirection: =LayoutDirection.Vertical
+          LayoutJustifyContent: =LayoutJustifyContent.Center
+          LayoutMode: =LayoutMode.Auto
+          RadiusBottomLeft: =15
+          RadiusBottomRight: =15
+          RadiusTopLeft: =15
+          RadiusTopRight: =15
+          Width: =Min(Parent.Width *35%,450)
+          X: =(Parent.Width - Self.Width) /2
+          Y: =(Parent.Height - Self.Height) /2
+        Children:
+        - Container21:
+            Control: GroupContainer
+            Variant: manualLayoutContainer
+            Properties:
+              AlignInContainer: =AlignInContainer.SetByContainer
+              DropShadow: =DropShadow.None
+              Fill: =MyTheme.LightGrey
+              FillPortions: =0
+              Height: =Parent.Height *10%
+              LayoutMinHeight: =0
+              LayoutMinWidth: =0
+              RadiusBottomLeft: =0
+              RadiusBottomRight: =0
+              RadiusTopLeft: =0
+              RadiusTopRight: =0
+              Width: =Parent.Width
+            Children:
+            - Rectangle3:
+                Control: Rectangle
+                Properties:
+                  DisplayMode: =DisplayMode.Disabled
+                  Fill: =RGBA(220, 220, 220, 1)
+                  Height: =1
+                  Width: =Parent.Width
+                  Y: =71
+            - Label8:
+                Control: Label
+                Properties:
+                  Text: ="Filter"
+                  Color: =MyTheme.Primary
+                  Font: =Font.'Lato Black'
+                  Height: =Parent.Height
+                  PaddingLeft: =20
+                  Size: =18
+                  Width: =Parent.Width *20%
+        - Container22:
+            Control: GroupContainer
+            Variant: verticalAutoLayoutContainer
+            Properties:
+              AlignInContainer: =AlignInContainer.SetByContainer
+              BorderStyle: =BorderStyle.None
+              DropShadow: =DropShadow.None
+              Height: =Parent.Height * 80%
+              LayoutDirection: =LayoutDirection.Vertical
+              LayoutGap: =10
+              LayoutMinHeight: =0
+              LayoutMode: =LayoutMode.Auto
+              PaddingBottom: =20
+              PaddingLeft: =20
+              PaddingRight: =20
+              PaddingTop: =20
+              RadiusBottomLeft: =0
+              RadiusBottomRight: =0
+              RadiusTopLeft: =0
+              RadiusTopRight: =0
+              Width: =Parent.Width
+            Children:
+            - Container24:
+                Control: GroupContainer
+                Variant: verticalAutoLayoutContainer
+                Properties:
+                  BorderStyle: =BorderStyle.None
+                  DropShadow: =DropShadow.None
+                  FillPortions: =0
+                  Height: =Parent.Height/7
+                  LayoutDirection: =LayoutDirection.Vertical
+                  LayoutMinHeight: =0
+                  LayoutMinWidth: =0
+                  LayoutMode: =LayoutMode.Auto
+                  PaddingBottom: =2
+                  PaddingLeft: =2
+                  PaddingRight: =2
+                  PaddingTop: =2
+                  RadiusBottomLeft: =0
+                  RadiusBottomRight: =0
+                  RadiusTopLeft: =0
+                  RadiusTopRight: =0
+                  Width: =Parent.Width
+                Children:
+                - Container25:
+                    Control: GroupContainer
+                    Variant: horizontalAutoLayoutContainer
+                    Properties:
+                      DropShadow: =DropShadow.None
+                      FillPortions: =0
+                      Height: =(Parent.Height -10)/2
+                      LayoutAlignItems: =LayoutAlignItems.Center
+                      LayoutJustifyContent: =LayoutJustifyContent.SpaceBetween
+                      LayoutMinHeight: =0
+                      LayoutMinWidth: =0
+                      LayoutMode: =LayoutMode.Auto
+                      PaddingBottom: =2
+                      PaddingLeft: =2
+                      PaddingRight: =2
+                      PaddingTop: =2
+                      RadiusBottomLeft: =0
+                      RadiusBottomRight: =0
+                      RadiusTopLeft: =0
+                      RadiusTopRight: =0
+                    Children:
+                    - Label10:
+                        Control: Label
+                        Properties:
+                          Text: ="Project Start Date"
+                          Color: =MyTheme.Grey
+                          Font: =Font.'Lato Black'
+                          Width: =Parent.Width * 50%
+                    - Button8_1:
+                        Control: Classic/Button
+                        Properties:
+                          OnSelect: =Reset(dtStartDateEnd);Reset(dtStartDateStart);
+                          Text: ="Clear"
+                          Align: =Align.Right
+                          BorderColor: =Color.Transparent
+                          Color: =MyTheme.Primary
+                          Fill: =Color.Transparent
+                          Font: =Font.'Lato Black'
+                          FontWeight: =FontWeight.Normal
+                          HoverBorderColor: =Color.Transparent
+                          HoverColor: =ColorFade( Self.Color,-20%)
+                          HoverFill: =Color.Transparent
+                          PressedColor: =ColorFade( Self.Color,-40%)
+                          PressedFill: =Color.Transparent
+                          Size: =13
+                          Width: =Parent.Width * 20%
+                - Container27:
+                    Control: GroupContainer
+                    Variant: horizontalAutoLayoutContainer
+                    Properties:
+                      BorderStyle: =BorderStyle.None
+                      DropShadow: =DropShadow.None
+                      FillPortions: =0
+                      Height: =(Parent.Height -10)/2
+                      LayoutGap: =4
+                      LayoutMinHeight: =0
+                      LayoutMinWidth: =0
+                      LayoutMode: =LayoutMode.Auto
+                      PaddingLeft: =2
+                      PaddingRight: =2
+                      PaddingTop: =2
+                      RadiusBottomLeft: =0
+                      RadiusBottomRight: =0
+                      RadiusTopLeft: =0
+                      RadiusTopRight: =0
+                    Children:
+                    - dtStartDateStart:
+                        Control: Classic/DatePicker
+                        Properties:
+                          DefaultDate: =Blank()
+                          Format: ="dd-mm-yyyy"
+                          InputTextPlaceholder: ="Start"
+                          Tooltip: =
+                          Color: =Color.Black
+                          Font: =Font.Lato
+                          Height: =Parent.Height -3
+                          PaddingTop: =2
+                          Width: =(Parent.Width -5)/2
+                    - dtStartDateEnd:
+                        Control: Classic/DatePicker
+                        Properties:
+                          DefaultDate: =Blank()
+                          Format: ="dd-mm-yyyy"
+                          InputTextPlaceholder: ="End"
+                          Tooltip: =
+                          Color: =Color.Black
+                          Font: =Font.Lato
+                          Height: =Parent.Height -3
+                          PaddingTop: =2
+                          Width: =(Parent.Width -5)/2
+            - Container24_1:
+                Control: GroupContainer
+                Variant: verticalAutoLayoutContainer
+                Properties:
+                  BorderStyle: =BorderStyle.None
+                  DropShadow: =DropShadow.None
+                  FillPortions: =0
+                  Height: =Parent.Height/7
+                  LayoutDirection: =LayoutDirection.Vertical
+                  LayoutMinHeight: =0
+                  LayoutMinWidth: =0
+                  LayoutMode: =LayoutMode.Auto
+                  PaddingBottom: =2
+                  PaddingLeft: =2
+                  PaddingRight: =2
+                  PaddingTop: =2
+                  RadiusBottomLeft: =0
+                  RadiusBottomRight: =0
+                  RadiusTopLeft: =0
+                  RadiusTopRight: =0
+                  Width: =Parent.Width
+                Children:
+                - Container25_1:
+                    Control: GroupContainer
+                    Variant: horizontalAutoLayoutContainer
+                    Properties:
+                      BorderStyle: =BorderStyle.None
+                      DropShadow: =DropShadow.None
+                      FillPortions: =0
+                      Height: =(Parent.Height -10)/2
+                      LayoutAlignItems: =LayoutAlignItems.Center
+                      LayoutJustifyContent: =LayoutJustifyContent.SpaceBetween
+                      LayoutMinHeight: =0
+                      LayoutMinWidth: =0
+                      LayoutMode: =LayoutMode.Auto
+                      PaddingBottom: =2
+                      PaddingLeft: =2
+                      PaddingRight: =2
+                      PaddingTop: =2
+                      RadiusBottomLeft: =0
+                      RadiusBottomRight: =0
+                      RadiusTopLeft: =0
+                      RadiusTopRight: =0
+                    Children:
+                    - Label10_1:
+                        Control: Label
+                        Properties:
+                          Text: ="Project Due Date"
+                          Color: =MyTheme.Grey
+                          Font: =Font.'Lato Black'
+                          Width: =Parent.Width * 50%
+                    - Button8_2:
+                        Control: Classic/Button
+                        Properties:
+                          OnSelect: =Reset(dtDueDateEnd);Reset(dtDueDateStart);
+                          Text: ="Clear"
+                          Align: =Align.Right
+                          BorderColor: =Color.Transparent
+                          Color: =MyTheme.Primary
+                          Fill: =Color.Transparent
+                          Font: =Font.'Lato Black'
+                          FontWeight: =FontWeight.Normal
+                          HoverBorderColor: =Color.Transparent
+                          HoverColor: =ColorFade( Self.Color,-20%)
+                          HoverFill: =Color.Transparent
+                          PressedColor: =ColorFade( Self.Color,-40%)
+                          PressedFill: =Color.Transparent
+                          Size: =14
+                          Width: =Parent.Width * 20%
+                - Container27_1:
+                    Control: GroupContainer
+                    Variant: horizontalAutoLayoutContainer
+                    Properties:
+                      BorderStyle: =BorderStyle.None
+                      DropShadow: =DropShadow.None
+                      FillPortions: =0
+                      Height: =(Parent.Height -10)/2
+                      LayoutGap: =4
+                      LayoutMinHeight: =0
+                      LayoutMinWidth: =0
+                      LayoutMode: =LayoutMode.Auto
+                      PaddingBottom: =5
+                      PaddingLeft: =2
+                      PaddingRight: =2
+                      PaddingTop: =2
+                      RadiusBottomLeft: =0
+                      RadiusBottomRight: =0
+                      RadiusTopLeft: =0
+                      RadiusTopRight: =0
+                    Children:
+                    - dtDueDateStart:
+                        Control: Classic/DatePicker
+                        Properties:
+                          DefaultDate: =Blank()
+                          Format: ="dd-mm-yyyy"
+                          InputTextPlaceholder: ="Start"
+                          Tooltip: =
+                          Color: =Color.Black
+                          Font: =Font.Lato
+                          Height: =Parent.Height -3
+                          PaddingTop: =2
+                          Width: =(Parent.Width -5)/2
+                    - dtDueDateEnd:
+                        Control: Classic/DatePicker
+                        Properties:
+                          DefaultDate: =Blank()
+                          Format: ="dd-mm-yyyy"
+                          InputTextPlaceholder: ="End"
+                          Tooltip: =
+                          Color: =Color.Black
+                          Font: =Font.Lato
+                          Height: =Parent.Height -3
+                          PaddingTop: =2
+                          Width: =(Parent.Width -5)/2
+        - Container23:
+            Control: GroupContainer
+            Variant: verticalAutoLayoutContainer
+            Properties:
+              AlignInContainer: =AlignInContainer.SetByContainer
+              DropShadow: =DropShadow.None
+              FillPortions: =0
+              Height: =Parent.Height *10%
+              LayoutAlignItems: =LayoutAlignItems.Center
+              LayoutGap: =20
+              LayoutJustifyContent: =LayoutJustifyContent.Center
+              LayoutMinHeight: =0
+              LayoutMinWidth: =0
+              LayoutMode: =LayoutMode.Auto
+              RadiusBottomLeft: =0
+              RadiusBottomRight: =0
+              RadiusTopLeft: =0
+              RadiusTopRight: =0
+              Width: =Parent.Width
+            Children:
+            - Button9:
+                Control: Classic/Button
+                Properties:
+                  Text: ="Save"
+                  Fill: =MyTheme.Primary
+                  HoverBorderColor: =ColorFade(Self.Fill, 20%)
+                  HoverColor: =Self.Color
+                  HoverFill: =ColorFade(Self.Fill, -20%)
+                  PressedColor: =Self.Color
+                  PressedFill: =Self.Fill
+                  Width: =(Parent.Width - Parent.Width * 15%) /3
+            - Button10:
+                Control: Classic/Button
+                Properties:
+                  OnSelect: |-
+                    =Reset(dtDueDateEnd);Reset(dtDueDateStart);
+                    Reset(dtStartDateEnd);Reset(dtStartDateStart);
+                  Text: ="Reset"
+                  Fill: =MyTheme.Primary
+                  HoverBorderColor: =ColorFade(Self.Fill, 20%)
+                  HoverColor: =Self.Color
+                  HoverFill: =ColorFade(Self.Fill, -20%)
+                  PressedColor: =Self.Color
+                  PressedFill: =Self.Fill
+                  Width: =(Parent.Width - Parent.Width * 15%) /3
+            - Button11:
+                Control: Classic/Button
+                Properties:
+                  OnSelect: =Set(varPopUpFilter,!varPopUpFilter)
+                  Text: ="Cancel"
+                  Fill: =MyTheme.Primary
+                  HoverBorderColor: =ColorFade(Self.Fill, 20%)
+                  HoverColor: =Self.Color
+                  HoverFill: =ColorFade(Self.Fill, -20%)
+                  PressedColor: =Self.Color
+                  PressedFill: =Self.Fill
+                  Width: =(Parent.Width - Parent.Width * 15%) /3
+    AccessAppScope: true
