@@ -1,0 +1,35 @@
+- Home:
+    Control: Screen
+    Children:
+    - Container5:
+        Control: GroupContainer
+        Variant: horizontalAutoLayoutContainer
+        Properties:
+          DropShadow: =DropShadow.None
+          Height: =Parent.Height
+          LayoutMode: =LayoutMode.Auto
+          RadiusBottomLeft: =0
+          RadiusBottomRight: =0
+          RadiusTopLeft: =0
+          RadiusTopRight: =0
+          Width: =Parent.Width
+        Children:
+        - LeftNav_1:
+            Control: Component
+            ComponentName: LeftNav
+            Properties:
+              Height: =Parent.Height
+              Width: =If(varMenuOpen,175,75)
+        - Container6:
+            Control: GroupContainer
+            Variant: verticalAutoLayoutContainer
+            Properties:
+              LayoutDirection: =LayoutDirection.Vertical
+              LayoutMode: =LayoutMode.Auto
+            Children:
+            - Header_1:
+                Control: Component
+                ComponentName: Header
+                Properties:
+                  Height: =60
+                  Width: =Max(Parent.Width,200)
