@@ -1,0 +1,155 @@
+- LeftNav:
+    Control: Component
+    Properties:
+      Height: =App.Height
+      Width: =If(varMenuOpen,175,75)
+    Children:
+    - Rectangle1:
+        Control: Rectangle
+        Properties:
+          Fill: =MyTheme.Grey
+          Height: =Parent.Height
+          Width: =1
+          X: =Parent.Width - Self.Width
+    - Container1:
+        Control: GroupContainer
+        Variant: verticalAutoLayoutContainer
+        Properties:
+          DropShadow: =DropShadow.None
+          Height: =Parent.Height
+          LayoutDirection: =LayoutDirection.Vertical
+          LayoutMode: =LayoutMode.Auto
+          RadiusBottomLeft: =0
+          RadiusBottomRight: =0
+          RadiusTopLeft: =0
+          RadiusTopRight: =0
+          Width: =Parent.Width
+        Children:
+        - Container2:
+            Control: GroupContainer
+            Variant: horizontalAutoLayoutContainer
+            Properties:
+              DropShadow: =DropShadow.None
+              FillPortions: =0
+              Height: =75
+              LayoutMinWidth: =0
+              LayoutMode: =LayoutMode.Auto
+              RadiusBottomLeft: =0
+              RadiusBottomRight: =0
+              RadiusTopLeft: =0
+              RadiusTopRight: =0
+            Children:
+            - Container3:
+                Control: GroupContainer
+                Variant: manualLayoutContainer
+                Properties:
+                  DropShadow: =DropShadow.None
+                  FillPortions: =0
+                  LayoutMinHeight: =0
+                  LayoutMinWidth: =0
+                  RadiusBottomLeft: =0
+                  RadiusBottomRight: =0
+                  RadiusTopLeft: =0
+                  RadiusTopRight: =0
+                  Width: =70
+                Children:
+                - Image1:
+                    Control: Image
+                    Properties:
+                      Image: ="data:image/svg+xml;utf8,"& EncodeUrl(Substitute(MyIcons.Hamburger,"currentColor",MyTheme.GreyText))
+                      Height: =Parent.Height
+                      PaddingLeft: =10
+                      PaddingRight: =10
+                      Width: =Parent.Width
+                - Button1:
+                    Control: Classic/Button
+                    Properties:
+                      OnSelect: =Set(varMenuOpen, !varMenuOpen);
+                      Text: =
+                      BorderThickness: =0
+                      Fill: =RGBA(0, 0, 0, 0)
+                      Height: =Parent.Height
+                      HoverColor: =RGBA(0, 0, 0, 0)
+                      HoverFill: =Color.Transparent
+                      PressedColor: =
+                      RadiusBottomLeft: =0
+                      RadiusBottomRight: =0
+                      RadiusTopLeft: =0
+                      RadiusTopRight: =0
+                      Width: =Parent.Width
+            - Label1:
+                Control: Label
+                Properties:
+                  Text: ="Tasky"
+                  AlignInContainer: =AlignInContainer.Stretch
+                  Color: =MyTheme.Primary
+                  FillPortions: =1
+                  FontWeight: =FontWeight.Bold
+                  LayoutMinHeight: =0
+                  LayoutMinWidth: =0
+                  Size: =24
+                  Visible: =varMenuOpen
+        - Gallery1:
+            Control: Gallery
+            Variant: galleryVertical
+            Properties:
+              Items: =MenuItem
+              Height: =IfError(Self.AllItemsCount * Self.TemplateHeight,0)
+              Layout: =Layout.Vertical
+              LayoutMinWidth: =0
+              LoadingSpinner: =LoadingSpinner.Data
+              TemplatePadding: =0
+              TemplateSize: =70
+            Children:
+            - Button5:
+                Control: Classic/Button
+                Properties:
+                  OnSelect: |-
+                    =Navigate(ThisItem.Screen,ScreenTransition.Fade);
+                    Set(varpop,false);
+                  Text: =
+                  BorderThickness: =0
+                  Color: =Color.Transparent
+                  Fill: =Color.Transparent
+                  Height: =70
+                  HoverFill: =Color.Transparent
+                  PressedColor: =Color.Transparent
+                  PressedFill: =Color.Transparent
+                  RadiusBottomLeft: =0
+                  RadiusBottomRight: =0
+                  RadiusTopLeft: =0
+                  RadiusTopRight: =0
+                  Width: =Parent.Width
+            - Container4:
+                Control: GroupContainer
+                Variant: manualLayoutContainer
+                Properties:
+                  DropShadow: =DropShadow.None
+                  Height: =Parent.TemplateHeight
+                  RadiusBottomLeft: =0
+                  RadiusBottomRight: =0
+                  RadiusTopLeft: =0
+                  RadiusTopRight: =0
+                  Width: =Parent.TemplateWidth
+                Children:
+                - Image2:
+                    Control: Image
+                    Properties:
+                      Image: ="data:image/svg+xml;utf8,"& EncodeUrl(Substitute(If(App.ActiveScreen=ThisItem.Screen,ThisItem.IconFill,ThisItem.Icon),"currentColor",If(App.ActiveScreen=ThisItem.Screen,MyTheme.PrimaryText,MyTheme.GreyText)))
+                      Height: =60
+                      ImagePosition: =ImagePosition.Stretch
+                      Width: =60
+                      X: =7.5
+                      Y: =7.5
+                - Label5:
+                    Control: Label
+                    Properties:
+                      Text: =ThisItem.Name
+                      Color: =If(App.ActiveScreen=ThisItem.Screen,MyTheme.Primary,MyTheme.Grey)
+                      FontWeight: =FontWeight.Semibold
+                      Height: =70
+                      Size: =15
+                      Visible: =varMenuOpen
+                      Width: =100
+                      X: =75
+    AccessAppScope: true
