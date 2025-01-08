@@ -1,0 +1,269 @@
+- Tasks:
+    Control: Screen
+    Children:
+    - PopupFilter_2:
+        Control: Component
+        ComponentName: PopupFilter
+        Properties:
+          Fill: =RGBA(0, 0, 0, .11)
+          Height: =App.Height
+          Visible: =varPopUpFilter
+          Width: =App.Width
+    - PopupFilter_1:
+        Control: Component
+        ComponentName: PopupFilter
+        Properties:
+          Fill: =RGBA(0, 0, 0, .11)
+          Height: =App.Height
+          Visible: =varPopUpFilter
+          Width: =App.Width
+    - Popup_1:
+        Control: Component
+        ComponentName: Popup
+        Properties:
+          Fill: =RGBA(0, 0, 0, .11)
+          Height: =App.Height
+          Visible: =varpop
+          Width: =App.Width
+    - Container5_2:
+        Control: GroupContainer
+        Variant: horizontalAutoLayoutContainer
+        Properties:
+          DropShadow: =DropShadow.None
+          Height: =Parent.Height
+          LayoutMode: =LayoutMode.Auto
+          RadiusBottomLeft: =0
+          RadiusBottomRight: =0
+          RadiusTopLeft: =0
+          RadiusTopRight: =0
+          Width: =Parent.Width
+        Children:
+        - LeftNav_3:
+            Control: Component
+            ComponentName: LeftNav
+            Properties:
+              Height: =Parent.Height
+              Width: =If(varMenuOpen,175,75)
+        - Container6_2:
+            Control: GroupContainer
+            Variant: verticalAutoLayoutContainer
+            Properties:
+              LayoutDirection: =LayoutDirection.Vertical
+              LayoutMode: =LayoutMode.Auto
+            Children:
+            - Header_3:
+                Control: Component
+                ComponentName: Header
+                Properties:
+                  Height: =60
+                  Width: =Max(Parent.Width,200)
+            - Container17:
+                Control: GroupContainer
+                Variant: horizontalAutoLayoutContainer
+                Properties:
+                  BorderStyle: =BorderStyle.None
+                  DropShadow: =DropShadow.None
+                  FillPortions: =0
+                  Height: =60
+                  LayoutAlignItems: =LayoutAlignItems.Stretch
+                  LayoutJustifyContent: =LayoutJustifyContent.SpaceBetween
+                  LayoutMinHeight: =0
+                  LayoutMinWidth: =0
+                  LayoutMode: =LayoutMode.Auto
+                  PaddingBottom: =3
+                  PaddingLeft: =3
+                  PaddingRight: =3
+                  PaddingTop: =3
+                  RadiusBottomLeft: =0
+                  RadiusBottomRight: =0
+                  RadiusTopLeft: =0
+                  RadiusTopRight: =0
+                  Width: =Max(Parent.Width,200)
+                Children:
+                - Label7:
+                    Control: Label
+                    Properties:
+                      Text: ="Tasks"
+                      Font: =Font.'Lato Black'
+                      Height: =Parent.Height
+                      Size: =18
+                      Width: =Parent.Width * 10%
+                - Button8:
+                    Control: Classic/Button
+                    Properties:
+                      OnSelect: =Set(varPopUpFilter,!varPopUpFilter)
+                      Text: ="Filter"
+                      BorderColor: =Color.Transparent
+                      Color: =MyTheme.Primary
+                      Fill: =Color.Transparent
+                      Font: =Font.'Lato Black'
+                      FontWeight: =FontWeight.Normal
+                      HoverBorderColor: =Color.Transparent
+                      HoverColor: =ColorFade( Self.Color,-20%)
+                      HoverFill: =Color.Transparent
+                      PressedColor: =ColorFade( Self.Color,-40%)
+                      PressedFill: =Color.Transparent
+                      Size: =18
+                      Width: =Parent.Width * 10%
+            - Gallery5:
+                Control: Gallery
+                Variant: galleryHorizontal
+                Properties:
+                  Items: =Choices('My-Tasks'.Status)
+                  Fill: =MyTheme.LightGrey
+                  LayoutMinHeight: =0
+                  LayoutMinWidth: =0
+                  LoadingSpinner: =LoadingSpinner.Data
+                  TemplatePadding: =0
+                  TemplateSize: =300
+                  Width: =Max( Parent.Width,600)
+                Children:
+                - Gallery6:
+                    Control: Gallery
+                    Variant: galleryVertical
+                    Properties:
+                      Items: =Filter('My-Tasks',Status.Value = ThisItem.Value)
+                      Height: =Parent.Height - Self.Y
+                      Layout: =Layout.Vertical
+                      LoadingSpinner: =LoadingSpinner.Data
+                      ShowScrollbar: =false
+                      TemplatePadding: =15
+                      TemplateSize: =200
+                      Width: =Parent.TemplateWidth
+                      Y: =80
+                    Children:
+                    - Button13:
+                        Control: Classic/Button
+                        Properties:
+                          OnSelect: |-
+                            =Set(
+                                varTask,ThisItem
+                            );
+                            ClearCollect(
+                                colTaskDropdown,
+                                [
+                                    {
+                                        Title: "Status",
+                                        Value: ThisItem.Status
+                                    },
+                                    {
+                                        Title: "Priority",
+                                        Value: ThisItem.Priority
+                                    }
+                                ]
+                            );
+                            Set(_dropdownSelectedType,{Title:Blank(),Value:Blank()});
+                            Navigate(
+                                Screen1,ScreenTransition.Fade
+                            );
+                          Text: =
+                          Color: =Color.Transparent
+                          Fill: =Color.Transparent
+                          Height: =Parent.Height - 10
+                          HoverFill: =Color.Transparent
+                          PressedColor: =Color.Transparent
+                          PressedFill: =Color.Transparent
+                          Width: =Parent.Width - 30
+                    - Container9:
+                        Control: GroupContainer
+                        Variant: verticalAutoLayoutContainer
+                        Properties:
+                          DropShadow: =DropShadow.Regular
+                          Fill: =RGBA(255, 255, 255, 1)
+                          LayoutDirection: =LayoutDirection.Vertical
+                          LayoutMode: =LayoutMode.Auto
+                          PaddingBottom: =10
+                          PaddingLeft: =20
+                          PaddingRight: =20
+                          PaddingTop: =10
+                          RadiusBottomLeft: =10
+                          RadiusBottomRight: =10
+                          RadiusTopLeft: =10
+                          RadiusTopRight: =10
+                          Width: =269
+                        Children:
+                        - Button4:
+                            Control: Classic/Button
+                            Properties:
+                              Text: =ThisItem.Priority.Value
+                              AlignInContainer: =AlignInContainer.Start
+                              BorderColor: =Self.Color
+                              Color: |-
+                                =Switch(
+                                    ThisItem.Priority.Value,
+                                    "High",Color.SeaGreen,
+                                    "Low",Color.DarkRed,
+                                    "Medium",Color.YellowGreen,
+                                    Color.Transparent
+                                )
+                              Fill: =RGBA(0, 0, 0, 0)
+                              Font: =Font.Lato
+                              Height: =28
+                              HoverBorderColor: =Self.Color
+                              HoverColor: =Self.Color
+                              HoverFill: =Color.Transparent
+                              PressedBorderColor: =Self.Color
+                              PressedColor: =Self.Color
+                              PressedFill: =Color.Transparent
+                              Width: =95
+                        - Label11:
+                            Control: Label
+                            Properties:
+                              Text: =ThisItem.Title
+                              AlignInContainer: =AlignInContainer.Stretch
+                              Font: =Font.'Lato Black'
+                              LayoutMinHeight: =0
+                              LayoutMinWidth: =0
+                              PaddingBottom: =0
+                              PaddingLeft: =0
+                              PaddingRight: =0
+                              Y: =5
+                        - Label12:
+                            Control: Label
+                            Properties:
+                              Text: =ThisItem.Description
+                              AlignInContainer: =AlignInContainer.Stretch
+                              Color: =MyTheme.Grey
+                              DisplayMode: =DisplayMode.View
+                              Font: =Font.'Lato Black'
+                              Height: =60
+                              LayoutMinWidth: =0
+                              Size: =12
+                              VerticalAlign: =VerticalAlign.Top
+                        - Label14:
+                            Control: Label
+                            Properties:
+                              Text: =Text( ThisItem.'Start Date',"mmm d") & "- " & Text( ThisItem.'Due Date', "mmm d")
+                              AlignInContainer: =AlignInContainer.Stretch
+                              FontWeight: =FontWeight.Semibold
+                              Size: =15
+                - Button3:
+                    Control: Classic/Button
+                    Properties:
+                      OnSelect: =Select(Parent)
+                      Text: =
+                      DisplayMode: =DisplayMode.View
+                      Fill: |-
+                        =Switch(
+                            ThisItem.Value,
+                            "To Do",MyTheme.Grey,
+                            "In Progress",MyTheme.Purple,
+                            "Completed",MyTheme.LightGreen,
+                            "Ready for QA",MyTheme.Primary,
+                            Color.Transparent
+                        )
+                      Height: =45
+                      Width: =20
+                      X: =35
+                      Y: =20
+                - Label9:
+                    Control: Label
+                    Properties:
+                      OnSelect: =Select(Parent)
+                      Text: =ThisItem.Value
+                      FontWeight: =FontWeight.Semibold
+                      Height: =45
+                      Size: =15
+                      Width: =Parent.TemplateWidth - Self.X
+                      X: =70
+                      Y: =20
