@@ -1,0 +1,158 @@
+- Projects:
+    Control: Screen
+    Children:
+    - Popup_2:
+        Control: Component
+        ComponentName: Popup
+        Properties:
+          Fill: =RGBA(0, 0, 0, .11)
+          Height: =App.Height
+          Visible: =varpop
+          Width: =App.Width
+    - Container5_1:
+        Control: GroupContainer
+        Variant: horizontalAutoLayoutContainer
+        Properties:
+          DropShadow: =DropShadow.None
+          Height: =Parent.Height
+          LayoutMode: =LayoutMode.Auto
+          RadiusBottomLeft: =0
+          RadiusBottomRight: =0
+          RadiusTopLeft: =0
+          RadiusTopRight: =0
+          Width: =Parent.Width
+        Children:
+        - LeftNav_2:
+            Control: Component
+            ComponentName: LeftNav
+            Properties:
+              Height: =Parent.Height
+              Width: =If(varMenuOpen,175,75)
+        - Container6_1:
+            Control: GroupContainer
+            Variant: verticalAutoLayoutContainer
+            Properties:
+              LayoutDirection: =LayoutDirection.Vertical
+              LayoutMode: =LayoutMode.Auto
+            Children:
+            - Header_2:
+                Control: Component
+                ComponentName: Header
+                Properties:
+                  Height: =60
+                  Width: =Max(Parent.Width,200)
+            - Label7_1:
+                Control: Label
+                Properties:
+                  Text: ="Projects"
+                  Font: =Font.'Lato Black'
+                  Height: =50
+                  Size: =20
+                  Width: =Parent.Width
+            - Gallery5_1:
+                Control: Gallery
+                Variant: galleryHorizontal
+                Properties:
+                  Items: =Choices('My-projects'.Status)
+                  Fill: =MyTheme.LightGrey
+                  LayoutMinHeight: =0
+                  LayoutMinWidth: =0
+                  LoadingSpinner: =LoadingSpinner.Data
+                  TemplatePadding: =0
+                  TemplateSize: =300
+                  Width: =Max( Parent.Width,600)
+                Children:
+                - Gallery6_1:
+                    Control: Gallery
+                    Variant: galleryVertical
+                    Properties:
+                      Items: =Filter('My-projects',Status.Value = ThisItem.Value)
+                      Height: =Parent.Height - Self.Y
+                      Layout: =Layout.Vertical
+                      LoadingSpinner: =LoadingSpinner.Data
+                      ShowScrollbar: =false
+                      TemplatePadding: =15
+                      TemplateSize: =200
+                      Width: =Parent.TemplateWidth
+                      Y: =80
+                    Children:
+                    - Container9_1:
+                        Control: GroupContainer
+                        Variant: verticalAutoLayoutContainer
+                        Properties:
+                          DropShadow: =DropShadow.Regular
+                          Fill: =RGBA(255, 255, 255, 1)
+                          Height: =Parent.TemplateHeight
+                          LayoutDirection: =LayoutDirection.Vertical
+                          LayoutMode: =LayoutMode.Auto
+                          PaddingBottom: =10
+                          PaddingLeft: =20
+                          PaddingRight: =20
+                          PaddingTop: =10
+                          RadiusBottomLeft: =10
+                          RadiusBottomRight: =10
+                          RadiusTopLeft: =10
+                          RadiusTopRight: =10
+                          Width: =Parent.TemplateWidth
+                        Children:
+                        - Label11_1:
+                            Control: Label
+                            Properties:
+                              Text: =ThisItem.Title
+                              AlignInContainer: =AlignInContainer.Stretch
+                              Font: =Font.'Lato Black'
+                              LayoutMinHeight: =0
+                              LayoutMinWidth: =0
+                              PaddingBottom: =0
+                              PaddingLeft: =0
+                              PaddingRight: =0
+                              Y: =5
+                        - Label12_1:
+                            Control: Label
+                            Properties:
+                              Text: =ThisItem.Description
+                              AlignInContainer: =AlignInContainer.Stretch
+                              Color: =MyTheme.Grey
+                              DisplayMode: =DisplayMode.View
+                              Font: =Font.'Lato Black'
+                              Height: =80
+                              LayoutMinWidth: =0
+                              Size: =12
+                              VerticalAlign: =VerticalAlign.Top
+                        - Label14_1:
+                            Control: Label
+                            Properties:
+                              Text: =Text( ThisItem.'Start Date',"mmm d") & "- " & Text( ThisItem.'Due Date', "mmm d")
+                              AlignInContainer: =AlignInContainer.Stretch
+                              FontWeight: =FontWeight.Semibold
+                              Size: =15
+                - Button3_1:
+                    Control: Classic/Button
+                    Properties:
+                      OnSelect: =Select(Parent)
+                      Text: =
+                      DisplayMode: =DisplayMode.View
+                      Fill: |-
+                        =Switch(
+                            ThisItem.Value,
+                            "To Do",MyTheme.Grey,
+                            "In Progress",MyTheme.Purple,
+                            "Completed",MyTheme.LightGreen,
+                            "Ready for QA",MyTheme.Primary,
+                            Color.Transparent
+                        )
+                      Height: =45
+                      Width: =20
+                      X: =35
+                      Y: =20
+                - Label9_1:
+                    Control: Label
+                    Properties:
+                      OnSelect: =Select(Parent)
+                      Text: =ThisItem.Value
+                      FontWeight: =FontWeight.Semibold
+                      Height: =45
+                      Size: =15
+                      Width: =Parent.TemplateWidth - Self.X
+                      X: =70
+                      Y: =20
