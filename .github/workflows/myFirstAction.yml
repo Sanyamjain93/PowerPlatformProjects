@@ -12,6 +12,15 @@ on:
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
+    inputs:
+      GIT_Organization:
+        description: 'GIT Organization for RCC Dev DB'
+        required: true
+        default: 'PT-IGP-CGI-EGI'
+        type: choice
+        options:
+          - PT-IGP-CGI-EGI
+      
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
